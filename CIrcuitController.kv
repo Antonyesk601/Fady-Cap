@@ -1,0 +1,88 @@
+#:kivy 2.0.0
+<ControllerScreen>:
+    id:controller
+    BoxLayout:
+        orientation: "vertical"
+        GridLayout:
+            size_hint_y:0.1
+            cols:3    
+            Label:
+                text: ""
+            Label:
+                text:'Override'
+            Label:
+                text:'Desired'
+        GridLayout:
+            size_hint_y:0.8
+            cols:3
+            Label:
+                text: "LED 1"
+            CheckBox:
+                id:LED_1_override
+                center_x: root.width/2 +50
+                center_y: root.top/2 +60
+                on_press:controller.manager.c.ForcedLEDValues[0]=str(int((LED_1_override.active)))+'\n'
+            CheckBox:
+                id:LED_1_desired
+                center_x: root.width/2 +50
+                center_y: root.top/2 +60
+                on_press:controller.manager.c.DesiredLEDValues[0]=str(int((LED_1_desired.active)))+'\n'
+            Label:
+                text: "LED 2"
+            CheckBox:
+                id:LED_2_override
+                center_x: root.width/2 +50
+                center_y: root.top/2 +60
+            CheckBox:
+                id:LED_2_desired
+                center_x: root.width/2 +50
+                center_y: root.top/2 +60
+                on_press:controller.manager.c.DesiredLEDValues[1]=str(int((LED_2_desired.active)))+'\n'
+            Label:
+                text: "LED 3"
+            CheckBox:
+                id:LED_3_override
+                center_x: root.width/2 +50
+                center_y: root.top/2 +60
+                on_press:controller.manager.c.ForcedLEDValues[2]=str(int((LED_3_override.active)))+'\n'
+            CheckBox:
+                id:LED_3_desired
+                center_x: root.width/2 +50
+                center_y: root.top/2 +60
+                on_press:controller.manager.c.DesiredLEDValues[2]=str(int((LED_3_desired.active)))+'\n'
+            Label:
+                text: "LED 4"
+            CheckBox:
+                id:LED_4_override
+                center_x: root.width/2 +50
+                center_y: root.top/2 +60
+                on_press:controller.manager.c.ForcedLEDValues[3]=str(int((LED_4_override.active)))+'\n'
+            CheckBox:
+                id:LED_4_desired
+                center_x: root.width/2 +50
+                center_y: root.top/2 +60
+                on_press:controller.manager.c.DesiredLEDValues[3]=str(int((LED_4_desired.active)))+'\n'
+        GridLayout:
+            size_hint_y:0.1
+            cols:4
+            Label:
+                id:LED_1_Status
+            Label:
+                id:LED_2_Status
+            Label:
+                id:LED_3_Status
+            Label:
+                id:LED_4_Status
+        BoxLayout:
+            size_hint_y:0.1
+            orientation: 'horizontal'
+            Label:
+                id:wattage
+            Button:
+                text:'Update Readings'
+                id: updatebutton
+                on_press:root.manager.c.Update()
+                on_press:LED_1_Status.text=str(int(controller.manager.c.ReportedLEDValues[0]))
+                on_press:LED_2_Status.text=str(int(controller.manager.c.ReportedLEDValues[1]))
+                on_press:LED_3_Status.text=str(int(controller.manager.c.ReportedLEDValues[2]))
+                on_press:LED_4_Status.text=str(int(controller.manager.c.ReportedLEDValues[3]))
